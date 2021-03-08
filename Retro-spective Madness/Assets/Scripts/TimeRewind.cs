@@ -20,12 +20,12 @@ public class TimeRewind : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             StartRewind();
         }
           
-        if (Input.GetKeyUp(KeyCode.T))
+        if (Input.GetKeyUp(KeyCode.R))
         {
             StopRewind();
         }

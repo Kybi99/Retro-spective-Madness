@@ -5,17 +5,41 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    private Animator animator;
+    public float forwardMoveSpeed = 6f;
+    public float sideMoveSpeed = 6f;
+    public float backwardMoveSpeed = 3f;
 
-    public float speed = 12f;
-
-    void Update()
+    private void Awake()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
 
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);    
+        Cursor.lockState = CursorLockMode.Locked;
     }
+    private void Update()
+    {
+        var horizontal = Input.GetAxis("Horizontal");
+        var vertical = Input.GetAxis("Vertical");
+        var movement = new Vector3(horizontal, 0, vertical);
 
+        animator.SetFloat("Speed", vertical);
+
+
+        if (vertical != 0)
+        {
+            float moveSpeedToUse = (vertical > 0) ? forwardMoveSpeed : backwardMoveSpeed;
+            controller.SimpleMove(transform.forward * moveSpeedToUse * vertical);
+        }
+        if (horizontal != 0)
+        {
+
+            float moveSpeedToUse;
+            moveSpeedToUse = (vertical >= 0) ? sideMoveSpeed : sideMoveSpeed/2;
+            controller.SimpleMove(transform.right * moveSpeedToUse * horizontal);
+        }
+
+    }
 }
+
+

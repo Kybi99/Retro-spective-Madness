@@ -8,18 +8,27 @@ public class RoadManager : MonoBehaviour
     public GameObject[] segments;
     public float speed = .1f;
     float segmentSize = 10f;
-
-    float startTime = 0f;
-    float holdTime = 5f;
+    private bool timeGoes=false;
+    private float holdTime = 2f;
 
     private void Update()
     {
         MoveSegments();
+        ButtonHold();
     }
 
-    public void ChangeScene()
+    private void ButtonHold()
     {
-        SceneManager.LoadScene("PortalScene");
+        if (Input.GetKeyDown(KeyCode.R))
+            timeGoes = true;
+        if (Input.GetKeyUp(KeyCode.R)) { 
+            timeGoes = false;
+            holdTime = 2f;
+        }
+        if (timeGoes)
+            holdTime -= Time.deltaTime;
+        if (holdTime <= 0)
+            SceneManager.LoadScene("PortalScene");
     }
 
     private void MoveSegments()
@@ -27,9 +36,7 @@ public class RoadManager : MonoBehaviour
        
         if (Input.GetKey(KeyCode.R))
         {
-            Invoke("ChangeScene", 2.0f);
-            
-
+           
             for (int i = 0; i < segments.Length; i++)
             {
                 float z = segments[i].transform.position.z;
