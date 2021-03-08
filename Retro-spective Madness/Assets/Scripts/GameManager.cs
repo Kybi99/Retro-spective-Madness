@@ -5,23 +5,38 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public static PlayerState playerState;
+   // public static PlayerState playerState;
     public static LevelState levelState;
-
-    public enum PlayerState
+    public PlayerMovement playerMovement;
+    public LookAround lookAround;
+    
+    /*public enum PlayerState
     {
         idle,
         running,
         dead
-    }
+    }*/
 
     public enum LevelState
     {
         solved,
-        failed
+        failed,
+        rewinding
+    }
+    private void Start()
+    {
+        levelState = LevelState.failed;
     }
 
-    public void LevelSolved() 
+    public void Update()
+    {
+        if (levelState == LevelState.rewinding)
+        {
+            playerMovement.enabled = false;
+            lookAround.enabled = false;
+        }
+    }
+   /* public void LevelSolved() 
     {
         levelState = LevelState.solved; 
     }
@@ -30,4 +45,8 @@ public class GameManager : MonoBehaviour
         levelState = LevelState.failed;
     }
     
+    public void LevelRewinding()
+    {
+        levelState = LevelState.rewinding;
+    }*/
 }

@@ -1,36 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeRewind : MonoBehaviour
 {
     private bool isRewinding = false;
-
-    public float recordTime = 3f;
-
+    public float recordTime = 5f;
+    public GameObject player;
     List<PointInTime> pointsInTime;
-
-    Rigidbody rb;
   
     void Start()
     {
         pointsInTime = new List<PointInTime>();
-        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (player.transform.position.y <= -5)
         {
+            GameManager.levelState = GameManager.LevelState.rewinding;
             StartRewind();
+            Invoke("StopRewind", 3);
+            Invoke("LoadNextScene", 3);
         }
-          
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            StopRewind();
-        }
-           
+                    
     }
+    public void LoadNextScene()
+    {
+        if (GameManager.levelState == GameManager.LevelState.solved)
+            SceneManager.LoadScene("Level2");
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     void FixedUpdate()
     {
         if (isRewinding)
@@ -54,7 +57,7 @@ public class TimeRewind : MonoBehaviour
     }
     void Record()
     {
-        if (pointsInTime.Count > Mathf.Round(5f / Time.fixedDeltaTime))
+        if (pointsInTime.Count > Mathf.Round(recordTime / Time.fixedDeltaTime))
         {
             pointsInTime.RemoveAt(pointsInTime.Count - 1);
         }
@@ -64,12 +67,10 @@ public class TimeRewind : MonoBehaviour
     public void StartRewind()
     {
         isRewinding = true;
-        rb.isKinematic = true;
     }
 
     public void StopRewind()
     {
         isRewinding = false;
-        rb.isKinematic = false;
     }
 }

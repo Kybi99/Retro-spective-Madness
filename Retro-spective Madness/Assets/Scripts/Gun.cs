@@ -4,16 +4,10 @@ public class Gun : MonoBehaviour
 {
     [Range(0.5f, 1.5f)] public float fireRate = 1;
     public Timer timer;
-    public GameManager gameManager;
     public AudioSource gunFireSource;
     private float fireTimer;
-    private int i;
-       
+    private int i = 0;
 
-    private void Awake()
-    {
-        i = 0;
-    }
     void Update()
     { 
         fireTimer += Time.deltaTime;
@@ -24,6 +18,10 @@ public class Gun : MonoBehaviour
                 fireTimer = 0f;
                 FireGun();
             }
+        }
+        if (i == 3 && timer.timeRemaining > 0)
+        {
+            GameManager.levelState = GameManager.LevelState.solved;
         }
     }
 
@@ -45,13 +43,11 @@ public class Gun : MonoBehaviour
             {
                 i++;
                 hitInfo.collider.gameObject.SetActive(false);
+                Debug.Log(timer.timeRemaining);
             }
                 
         }
-        if (i == 3 && timer.timeRemaining > 0)
-        {
-            gameManager.LevelSolved();
-        }
+     
     }
 
 }

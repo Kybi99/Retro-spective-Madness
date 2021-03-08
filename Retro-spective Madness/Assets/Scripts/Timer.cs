@@ -9,7 +9,6 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning = false;
     public Text time;
     private float timeLeft;
-    public GameManager gameManager;
 
     private void Start()
     {
@@ -35,7 +34,8 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
-                gameManager.LevelFailed();
+                GameManager.levelState = GameManager.LevelState.failed;
+                time.text = "Time Elapsed ";
             }
         }
     }
