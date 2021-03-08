@@ -29,7 +29,7 @@ public class TimeRewind : MonoBehaviour
     public void LoadNextScene()
     {
         if (GameManager.levelState == GameManager.LevelState.solved)
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

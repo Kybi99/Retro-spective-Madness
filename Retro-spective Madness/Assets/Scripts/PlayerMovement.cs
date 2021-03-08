@@ -19,6 +19,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        Move();
+    }
+
+    private void Move()
+    {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         var movement = new Vector3(horizontal, 0, vertical);
@@ -35,9 +40,10 @@ public class PlayerMovement : MonoBehaviour
         {
 
             float moveSpeedToUse;
-            moveSpeedToUse = (vertical >= 0) ? sideMoveSpeed : sideMoveSpeed/2;
+            moveSpeedToUse = (vertical >= 0) ? sideMoveSpeed : sideMoveSpeed / 2;
             controller.SimpleMove(transform.right * moveSpeedToUse * horizontal);
         }
+
 
     }
 }
