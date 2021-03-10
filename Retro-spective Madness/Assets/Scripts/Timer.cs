@@ -9,14 +9,20 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning = false;
     public Text time;
     private float timeLeft;
+    public Gun gun;
 
     private void Start()
     {
-        timerIsRunning = true;
+        Invoke("StartTimer", 2);
     }
 
     void Update()
     {
+        if (gun.i == 3 && timeRemaining > 0)
+        {
+            GameManager.levelState = GameManager.LevelState.solved;
+        }
+
         if (Input.GetKey(KeyCode.T))
         {
             timerIsRunning = false;
@@ -38,5 +44,9 @@ public class Timer : MonoBehaviour
                 time.text = "Time Elapsed ";
             }
         }
+    }
+    void StartTimer()
+    {
+        timerIsRunning = true;
     }
 }

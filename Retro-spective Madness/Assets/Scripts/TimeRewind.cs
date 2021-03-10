@@ -5,31 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class TimeRewind : MonoBehaviour
 {
-    private bool isRewinding = false;
+    [HideInInspector] static public bool isRewinding = false;
     public float recordTime = 5f;
     public GameObject player;
     List<PointInTime> pointsInTime;
-  
+
     void Start()
     {
         pointsInTime = new List<PointInTime>();
     }
-
-    void Update()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (player.transform.position.y <= -5)
+        if (hit.gameObject.tag == "Trigger")
         {
-            GameManager.levelState = GameManager.LevelState.rewinding;
             StartRewind();
             Invoke("StopRewind", 3);
             Invoke("LoadNextScene", 3);
+            DialogManager.canTalk = true;
         }
-                    
     }
+
     public void LoadNextScene()
     {
-        if (GameManager.levelState == GameManager.LevelState.solved)
+        Debug.Log(GameManager.levelState);
+        if (GameManager.levelState == GameManager.LevelState.solved) 
+        { 
             SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
+            GameManager.levelState = GameManager.LevelState.failed;
+        }
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -38,6 +41,7 @@ public class TimeRewind : MonoBehaviour
     {
         if (isRewinding)
             Rewind();
+
         else
             Record();
     }

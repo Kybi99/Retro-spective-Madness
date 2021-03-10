@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
-    private Animator animator;
+    public Animator animator;
     public float forwardMoveSpeed = 6f;
     public float sideMoveSpeed = 6f;
     public float backwardMoveSpeed = 3f;
@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (horizontal != 0)
         {
-
             float moveSpeedToUse;
             moveSpeedToUse = (vertical >= 0) ? sideMoveSpeed : sideMoveSpeed / 2;
             controller.SimpleMove(transform.right * moveSpeedToUse * horizontal);

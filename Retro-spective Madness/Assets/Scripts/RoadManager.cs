@@ -28,7 +28,7 @@ public class RoadManager : MonoBehaviour
         if (timeGoes)
             holdTime -= Time.deltaTime;
         if (holdTime <= 0)
-            SceneManager.LoadScene("PortalScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
     private void MoveSegments()

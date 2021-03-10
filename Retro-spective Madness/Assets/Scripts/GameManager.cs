@@ -1,53 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
-   // public static PlayerState playerState;
     public static LevelState levelState;
     public PlayerMovement playerMovement;
     public LookAround lookAround;
-    
-    /*public enum PlayerState
-    {
-        idle,
-        running,
-        dead
-    }*/
+    public Text solution;
+
 
     public enum LevelState
     {
         solved,
-        failed,
-        rewinding
-    }
-    private void Start()
-    {
-        levelState = LevelState.failed;
+        failed
     }
 
     public void Update()
     {
-        if (levelState == LevelState.rewinding)
+        if (TimeRewind.isRewinding)
         {
             playerMovement.enabled = false;
             lookAround.enabled = false;
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (solution.gameObject.activeInHierarchy)
+                solution.gameObject.SetActive(false);
+            else
+                solution.gameObject.SetActive(true);
+        }
     }
 
-   /* public void LevelSolved() 
-    {
-        levelState = LevelState.solved; 
-    }
-    public void LevelFailed()
-    {
-        levelState = LevelState.failed;
-    }
-    
-    public void LevelRewinding()
-    {
-        levelState = LevelState.rewinding;
-    }*/
+ 
 }
