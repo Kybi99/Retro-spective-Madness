@@ -9,7 +9,7 @@ public class TimeRewind : MonoBehaviour
     public float recordTime = 5f;
     public GameObject player;
     List<PointInTime> pointsInTime;
-
+    public LevelLoader levelLoader;
     void Start()
     {
         pointsInTime = new List<PointInTime>();
@@ -29,8 +29,8 @@ public class TimeRewind : MonoBehaviour
     {
         Debug.Log(GameManager.levelState);
         if (GameManager.levelState == GameManager.LevelState.solved) 
-        { 
-            SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
+        {
+            levelLoader.LoadNextLevel();
             GameManager.levelState = GameManager.LevelState.failed;
         }
         else

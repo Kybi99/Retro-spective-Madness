@@ -4,9 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    void OnLevelWasLoaded(int level)
+    {
+        if (FindObjectOfType<PlayerMovement>() != null)
+        {
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+    public LevelLoader levelLoader;
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelLoader.LoadNextLevel();
     }
     public void QuitGame()
     {

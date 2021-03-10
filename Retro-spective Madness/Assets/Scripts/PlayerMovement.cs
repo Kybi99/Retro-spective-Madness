@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()

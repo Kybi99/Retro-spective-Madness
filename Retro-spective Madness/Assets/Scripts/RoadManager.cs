@@ -10,7 +10,7 @@ public class RoadManager : MonoBehaviour
     float segmentSize = 10f;
     private bool timeGoes=false;
     private float holdTime = 2f;
-
+    public LevelLoader levelLoader;
     private void Update()
     {
         MoveSegments();
@@ -28,7 +28,7 @@ public class RoadManager : MonoBehaviour
         if (timeGoes)
             holdTime -= Time.deltaTime;
         if (holdTime <= 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+            levelLoader.LoadNextLevel();
     }
 
     private void MoveSegments()
