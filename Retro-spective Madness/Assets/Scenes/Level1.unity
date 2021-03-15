@@ -20993,7 +20993,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 190837294}
+      - m_Target: {fileID: 1938021248}
         m_MethodName: LoadMenu
         m_Mode: 1
         m_Arguments:
@@ -30498,7 +30498,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 190837294}
+      - m_Target: {fileID: 1938021248}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -64851,7 +64851,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938021247}
+      - m_Target: {fileID: 1938021248}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
