@@ -16,10 +16,19 @@ public class MainMenu : MonoBehaviour
             Cursor.visible = true;
         }
     }
+
     public LevelLoader levelLoader;
-    public void PlayGame()
+    public void PlayLevel1()
     {
-        levelLoader.LoadNextLevel();
+        levelLoader.LoadLevel1();
+    }
+    public void PlayLevel2()
+    {
+        levelLoader.LoadLevel2();
+    }
+    public void PlayLevel3()
+    {
+        levelLoader.LoadLevel3();
     }
     public void QuitGame()
     {

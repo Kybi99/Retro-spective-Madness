@@ -11,7 +11,18 @@ public class LevelLoader : MonoBehaviour
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
-
+    public void LoadLevel1()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+    public void LoadLevel2()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 2));
+    }
+    public void LoadLevel3()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 3));
+    }
     IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
