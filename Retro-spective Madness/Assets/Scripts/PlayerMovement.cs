@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Move();
+        
     }
 
     private void Move()
@@ -26,6 +27,16 @@ public class PlayerMovement : MonoBehaviour
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         var movement = new Vector3(horizontal, 0, vertical);
+
+        if (Input.GetKeyDown(KeyCode.D) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.A))
+            animator.SetBool("RunningRight", true);
+        else if (Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
+            animator.SetBool("RunningLeft", true);
+        else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+        {
+            animator.SetBool("RunningRight", false);
+            animator.SetBool("RunningLeft", false);
+        }
 
         animator.SetFloat("Speed", vertical);
 

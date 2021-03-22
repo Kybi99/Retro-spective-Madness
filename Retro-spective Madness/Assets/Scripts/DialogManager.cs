@@ -86,6 +86,9 @@ public class DialogManager : MonoBehaviour
                     npcDialogueBox.text = npc.dialogue[1];
                     Invoke("EndDialogue", 1);
                     enemyAnim.Play("Aim");
+                    Vector3 delta = new Vector3(player.transform.position.x - this.transform.position.x, 0.0f, player.transform.position.z - this.transform.position.z);
+                    Quaternion rotation = Quaternion.LookRotation(delta);
+                    this.transform.rotation = rotation;
                     Invoke("BlackScreen", 1);
                     GameManager.levelState = GameManager.LevelState.failed;
                     canTalk = false;
